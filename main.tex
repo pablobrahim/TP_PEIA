@@ -1,0 +1,298 @@
+\documentclass[12pt]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{array}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\geometry{a4paper, margin=2.5cm}
+
+\title{Análisis Estadístico de Ventas \\ Supermercados Santa Ana y La Floresta}
+\author{Pablo Brahim - Kevin Pennington (Grupo 6) \\ 
+Especialización en Inteligencia Artificial \\ 
+Laboratorio de Sistemas Embebidos - UBA}
+\date{Fecha:30/04/2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Introducción}
+Este informe presenta el análisis estadístico de las ventas diarias de los supermercados Santa Ana y La Floresta durante el año 2023, respondiendo a tres inquietudes clave del propietario Don Francisco:
+
+\begin{enumerate}
+    \item Comportamiento mensual de ventas para planificación de vacaciones e inversiones
+    \item Comportamiento semanal para optimización de horarios y personal
+    \item Comparación estadística entre el desempeño de ambas tiendas
+\end{enumerate}
+
+\section{Metodología}
+
+\subsection{Datos y Procesamiento}
+Se analizaron registros diarios de ventas en dólares de todo 2023 para ambas tiendas. El procesamiento incluyó:
+
+\begin{itemize}
+    \item Transformación de fechas (extracción de mes y día de semana)
+    \item Cálculo de estadísticos descriptivos (medias, medianas, intervalos)
+    \item Análisis de distribuciones mediante técnicas no paramétricas
+\end{itemize}
+
+\subsection{Técnicas Estadísticas}
+\begin{itemize}
+    \item Funciones de distribución empírica (ECDF) y estimación de densidad (KDE)
+    \item Intervalos de confianza al 95\% y 99\% (método normal)
+    \item Prueba t de Welch para muestras independientes (varianzas desiguales)
+    \item Cálculo del tamaño del efecto (d de Cohen) y potencia estadística
+\end{itemize}
+
+\section{Resultados}
+
+\subsection{Análisis Mensual}
+
+La Figura \ref{fig:comp_mensual} muestra la comparación mensual entre ambas tiendas, revelando:
+
+\begin{itemize}
+    \item Una diferencia promedio de \$3,077.57 (IC 99\%: [\$2,600; \$3,555])
+    \item Patrón estacional similar con picos en noviembre-diciembre
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{comparativo_mensual.png}
+\caption{Comparación de ventas mensuales con intervalos de confianza del 95\%. Las áreas sombreadas representan la variabilidad en cada mes. Los meses de noviembre y diciembre presentan los mayores volúmenes de ventas para ambas tiendas.}
+\label{fig:comp_mensual}
+\end{figure}
+
+\textbf{Análisis de intervalos de confianza mensuales:} Las siguientes tablas presentan los resultados detallados para cada tienda, mostrando las medias e intervalos de confianza al 95\% y 99\% para cada mes del año. Estos valores permiten identificar patrones estacionales y comparar el desempeño entre ambas tiendas.
+
+\begin{table}[H]
+\centering
+\caption{Intervalos de confianza mensuales - Santa Ana (USD)}
+\begin{tabular}{lrrrrr}
+\toprule
+Mes & Media & IC 95\% inferior & IC 95\% superior & IC 99\% inferior & IC 99\% superior \\
+\midrule
+Enero & 18,206 & 17,347 & 19,065 & 17,077 & 19,335 \\
+Febrero & 19,848 & 18,734 & 20,962 & 18,384 & 21,312 \\
+Marzo & 22,646 & 21,686 & 23,606 & 21,384 & 23,908 \\
+Abril & 20,606 & 19,614 & 21,599 & 19,302 & 21,910 \\
+Mayo & 22,469 & 21,660 & 23,277 & 21,406 & 23,531 \\
+Junio & 22,906 & 21,862 & 23,950 & 21,534 & 24,277 \\
+Julio & 21,651 & 20,925 & 22,377 & 20,697 & 22,605 \\
+Agosto & 23,297 & 22,180 & 24,413 & 21,829 & 24,766 \\
+Septiembre & 23,307 & 22,317 & 24,298 & 22,006 & 24,609 \\
+Octubre & 23,125 & 22,207 & 24,043 & 21,918 & 24,331 \\
+Noviembre & 23,393 & 22,481 & 24,305 & 22,194 & 24,591 \\
+Diciembre & 21,779 & 20,895 & 22,662 & 20,618 & 22,939 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Intervalos de confianza mensuales - La Floresta (USD)}
+\begin{tabular}{lrrrrr}
+\toprule
+Mes & Media & IC 95\% inferior & IC 95\% superior & IC 99\% inferior & IC 99\% superior \\
+\midrule
+Enero & 15,209 & 14,267 & 16,150 & 13,972 & 16,445 \\
+Febrero & 17,437 & 16,553 & 18,321 & 16,276 & 18,598 \\
+Marzo & 19,614 & 18,537 & 20,691 & 18,199 & 21,029 \\
+Abril & 17,223 & 16,392 & 18,055 & 16,131 & 18,316 \\
+Mayo & 19,314 & 18,326 & 20,301 & 18,016 & 20,611 \\
+Junio & 20,102 & 19,171 & 21,033 & 18,879 & 21,325 \\
+Julio & 19,131 & 18,153 & 20,108 & 17,845 & 20,416 \\
+Agosto & 19,984 & 18,887 & 21,082 & 18,542 & 21,427 \\
+Septiembre & 19,825 & 18,975 & 20,675 & 18,708 & 20,942 \\
+Octubre & 19,917 & 18,999 & 20,835 & 18,711 & 21,122 \\
+Noviembre & 20,814 & 19,741 & 21,887 & 19,404 & 22,223 \\
+Diciembre & 17,798 & 16,788 & 18,808 & 16,471 & 19,125 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Las Figuras \ref{fig:dist_mensual_sa} y \ref{fig:dist_mensual_lf} detallan las distribuciones mensuales:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{distribuciones_mensuales_Santa_Ana.png}
+\caption{Distribuciones mensuales de ventas en Santa Ana. Las curvas ECDF (izquierda) muestran la probabilidad acumulada, mientras que las KDE (derecha) revelan la densidad de probabilidad. Se observa mayor concentración alrededor de la media en meses como mayo y noviembre.}
+\label{fig:dist_mensual_sa}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{distribuciones_mensuales_La_Floresta.png}
+\caption{Distribuciones mensuales de ventas en La Floresta. Las curvas presentan mayor dispersión que en Santa Ana, especialmente en meses de alta demanda (diciembre). Las distribuciones muestran asimetría positiva en varios meses.}
+\label{fig:dist_mensual_lf}
+\end{figure}
+
+\subsection{Análisis Semanal}
+
+La Figura \ref{fig:comp_semanal} evidencia patrones semanales consistentes:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{comparativo_semanal.png}
+\caption{Patrón semanal de ventas con intervalos de confianza del 95\%. Los miércoles y jueves muestran los mayores volúmenes, mientras los domingos tienen ventas significativamente menores (p < 0.001). La diferencia entre tiendas se amplifica los fines de semana.}
+\label{fig:comp_semanal}
+\end{figure}
+
+\textbf{Análisis de patrones semanales:} Las siguientes tablas muestran el comportamiento de ventas por día de la semana para ambas tiendas, incluyendo intervalos de confianza que permiten evaluar la significancia estadística de las diferencias observadas.
+
+\begin{table}[H]
+\centering
+\caption{Intervalos de confianza semanales - Santa Ana (USD)}
+\begin{tabular}{lrrrrr}
+\toprule
+Día & Media & IC 95\% inferior & IC 95\% superior & IC 99\% inferior & IC 99\% superior \\
+\midrule
+Lunes & 20,901 & 20,156 & 21,647 & 19,921 & 21,882 \\
+Martes & 22,946 & 22,230 & 23,661 & 21,950 & 23,941 \\
+Miércoles & 23,780 & 23,087 & 24,473 & 22,869 & 24,691 \\
+Jueves & 23,652 & 23,005 & 24,298 & 22,730 & 24,573 \\
+Viernes & 23,028 & 22,489 & 23,567 & 22,319 & 23,737 \\
+Sábado & 20,444 & 19,707 & 21,181 & 19,475 & 21,413 \\
+Domingo & 18,933 & 18,221 & 19,644 & 17,997 & 19,868 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Intervalos de confianza semanales - La Floresta (USD)}
+\begin{tabular}{lrrrrr}
+\toprule
+Día & Media & IC 95\% inferior & IC 95\% superior & IC 99\% inferior & IC 99\% superior \\
+\midrule
+Lunes & 17,853 & 17,138 & 18,568 & 16,913 & 18,793 \\
+Martes & 19,869 & 19,176 & 20,561 & 18,950 & 20,787 \\
+Miércoles & 20,666 & 19,992 & 21,341 & 19,780 & 21,553 \\
+Jueves & 20,726 & 20,025 & 21,428 & 19,704 & 21,749 \\
+Viernes & 19,918 & 19,218 & 20,618 & 18,998 & 20,838 \\
+Sábado & 17,625 & 16,900 & 18,350 & 16,672 & 18,578 \\
+Domingo & 15,490 & 14,870 & 16,110 & 14,675 & 16,305 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Las distribuciones detalladas por día se muestran en las Figuras \ref{fig:dist_semanal_sa} y \ref{fig:dist_semanal_lf}:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{distribuciones_semanales_Santa_Ana.png}
+\caption{Distribuciones semanales de ventas en Santa Ana. Los días centrales de la semana (martes-jueves) muestran distribuciones más simétricas, mientras los domingos presentan colas más largas hacia valores bajos.}
+\label{fig:dist_semanal_sa}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{distribuciones_semanales_La_Floresta.png}
+\caption{Distribuciones semanales de ventas en La Floresta. Se observa mayor variabilidad día a día comparado con Santa Ana. Las curvas KDE muestran bimodalidad los viernes, sugiriendo posibles patrones de compra diferenciados.}
+\label{fig:dist_semanal_lf}
+\end{figure}
+
+\subsection{Prueba de Hipótesis}
+
+La Figura \ref{fig:dist_ventas} resume la comparación global entre tiendas:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{distribuciones_ventas.png}
+\caption{Distribuciones globales de ventas diarias. La diferencia de medias (\$3,077.57) es estadísticamente significativa (t = 13.50, p $<$ 0.0001). El tamaño del efecto (d = 0.78) indica una diferencia grande según los criterios de Cohen.}
+\label{fig:dist_ventas}
+\end{figure}
+
+\section{Conclusiones}
+
+\subsection{Respuestas a las Inquietudes}
+
+\subsubsection{1. Planificación de Vacaciones e Inversiones}
+
+\begin{itemize}
+\item \textbf{Vacaciones recomendadas}: 
+\begin{itemize}
+\item Mes con menores ventas: \textbf{Febrero} (ventas 15-20\% inferiores al promedio)
+\item Fundamentación estadística: Los intervalos de confianza del 99\% muestran los valores más bajos en este mes (Tablas 1 y 2)
+\end{itemize}
+
+\item \textbf{Inversiones importantes}:
+\begin{itemize}
+\item Mejor período: \textbf{Noviembre-Diciembre} (ventas máximas anuales)
+\item Diferencia significativa: Santa Ana mantiene ventas consistentemente más altas (Figura \ref{fig:comp_mensual})
+\end{itemize}
+\end{itemize}
+
+\subsubsection{2. Optimización de Horarios}
+
+\begin{itemize}
+\item \textbf{Días de mayor demanda}:
+\begin{itemize}
+\item Santa Ana: Miércoles y Jueves (ventas promedio \$23,780 y \$23,652)
+\item La Floresta: Jueves y Miércoles (ventas promedio \$20,726 y \$20,666)
+\end{itemize}
+
+\item \textbf{Días de menor demanda}:
+\begin{itemize}
+\item Ambas tiendas: Domingo (ventas 18-22\% inferiores al promedio)
+\end{itemize}
+
+\item \textbf{Recomendación básica}:
+\begin{itemize}
+\item Aumentar personal los días de mayor afluencia
+\item Reducir horario los domingos
+\end{itemize}
+\end{itemize}
+
+\subsubsection{3. Comparación entre Tiendas}
+
+\begin{itemize}
+\item \textbf{Hallazgo principal}:
+\begin{itemize}
+\item Diferencia estadísticamente significativa (p $<$ 0.0001)
+\item Santa Ana genera \$3,077.57 más por día en promedio (IC 99\%: [\$2,600; \$3,555])
+\end{itemize}
+
+\item \textbf{Patrones observados}:
+\begin{itemize}
+\item La diferencia se mantiene en todos los meses (Figura \ref{fig:comp_mensual})
+\item Se amplifica los fines de semana (Figura \ref{fig:comp_semanal})
+\end{itemize}
+\end{itemize}
+
+\subsection{Recomendaciones Estrictamente Basadas en los Datos}
+
+\begin{itemize}
+\item \textbf{Vacaciones}: Programar en febrero, preferiblemente en la segunda quincena
+\item \textbf{Personal}:
+\begin{itemize}
+\item Refuerzo los miércoles y jueves
+\item Reducción los domingos
+\end{itemize}
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\caption{Resumen de acciones recomendadas}
+\begin{tabular}{lp{8cm}}
+\toprule
+\textbf{Inquietud} & \textbf{Respuesta Directa} \\
+\midrule
+Vacaciones & Febrero (segunda quincena) \\
+Inversiones & Último trimestre (nov-dic) \\
+Personal & \begin{itemize}
+\item Añadir personal miércoles-jueves
+\item Reducir domingos
+\end{itemize} \\
+Diferencia tiendas & \begin{itemize}
+\item Santa Ana supera significativamente a La Floresta
+\end{itemize} \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{document}
